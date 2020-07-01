@@ -12,6 +12,16 @@ use Illuminate\Support\Str;
 
 class UrlShortenerController extends Controller
 {
+    public function viewHome()
+    {
+        return view('home');
+    }
+
+    public function viewList()
+    {
+        return view('list');
+    }
+
     public function createShortURL(Request $request)
     {
         $request->validate([
@@ -44,6 +54,10 @@ class UrlShortenerController extends Controller
             $saveGeneratedURL = new UrlAddress();
             $saveGeneratedURL['url_destination'] = $request->input('url');
             $saveGeneratedURL['path_generated'] = $generatedPath;
+            $userSession = $request->session()->has('user');
+            if ($userSession) {
+                $saveGeneratedURL['user_id'] = $userSession;
+            }
 
             if ($request->input('expired_date') != null && $request->input('expired_date') != "") {
                 $saveGeneratedURL['date_expired'] = $request->input('expired_date');

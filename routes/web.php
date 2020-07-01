@@ -13,9 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', "UrlShortenerController@viewHome");
 Route::post('/s/g', "UrlShortenerController@createShortURL");
 Route::get('/s/{pathGenerated}', "UrlShortenerController@openDestination");
 Route::post('/s/{pathGenerated}/open/protection', "UrlShortenerController@openProtectedDestination");
+
+Route::middleware('auth.web')->group(function () {
+    Route::get('/list', "UrlShortenerController@viewList");
+
+    Route::post('/web/change/password', "SecurityController@formChangePassword");
+});
+
+Route::post('/web/login', "SecurityController@formLogin");
+Route::post('/web/forgot', "SecurityController@formForgotPassword");
+Route::post('/web/register', "SecurityController@formRegister");
+Route::get('/web/logout', "SecurityController@formLogout");
+

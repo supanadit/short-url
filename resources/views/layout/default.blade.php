@@ -64,20 +64,40 @@
                 <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="/">Home</a></li>
+                        @if(Session::get('user') != null)
+                            <li>
+                                <a href="/list">
+                                    My URL Shortener
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#change-password-modal">
+                                    Change Password
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <li>
-                            <a href="#">
-                                <span>Sign In</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span>Register</span>
-                            </a>
-                        </li>
+                        @if(Session::get('user') == null)
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#sign-in-modal">
+                                    <span>Sign In</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#register-modal">
+                                    <span>Register</span>
+                                </a>
+                            </li>
+                        @else
+                            <li>
+                                <a href="#" class="logout-button">
+                                    <span>Sign Out</span>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -120,6 +140,152 @@
 </div>
 <!-- ./wrapper -->
 
+@if(Session::get('user') == null)
+    {{-- Forgot Password Modal --}}
+    <div class="modal fade" id="forgot-password-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/" method="post" id="forgot-password-modal-form">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Forgot Password</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" placeholder="Insert your email"
+                                   id="forgot-password-modal-form-field-email">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-spinner fa-spin" id="forgot-password-modal-save-loading-indicator"></i>
+                            <span id="forgot-password-modal-save-button-label">Sign In</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    {{-- Sign In Modal --}}
+    <div class="modal fade" id="sign-in-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/" method="post" id="sign-in-modal-form">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Sign In</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" placeholder="Insert your email"
+                                   id="sign-in-modal-form-field-email">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" placeholder="Insert your new password"
+                                   id="sign-in-modal-form-field-password">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger pull-left"
+                                id="sign-in-modal-button-forgot-password">Forgot Password
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-spinner fa-spin" id="sign-in-modal-save-loading-indicator"></i>
+                            <span id="sign-in-modal-save-button-label">Sign In</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    {{-- Register Modal --}}
+    <div class="modal fade" id="register-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/" method="post" id="register-modal-form">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Register</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" placeholder="Insert your name"
+                                   id="register-modal-form-field-name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" placeholder="Insert your email"
+                                   id="register-modal-form-field-email">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" placeholder="Insert your new password"
+                                   id="register-modal-form-field-password">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" class="form-control" placeholder="Please confirm new password"
+                                   id="register-modal-form-password-confirm">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-spinner fa-spin" id="register-modal-save-loading-indicator"></i>
+                            <span id="register-modal-save-button-label">Register</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+@else
+    {{-- Change Password Modal --}}
+    <div class="modal fade" id="change-password-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="/" method="post" id="change-password-modal-form">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Change Password</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <input type="password" class="form-control" placeholder="Insert your new password"
+                                   id="change-password-modal-form-field-password">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" class="form-control" placeholder="Please confirm new password"
+                                   id="change-password-modal-form-field-password-confirm">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-spinner fa-spin" id="change-password-modal-save-loading-indicator"></i>
+                            <span id="change-password-modal-save-button-label">Save</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+@endif
+
 <!-- jQuery 3 -->
 <script src="{{asset('vendor/jquery/dist/jquery.min.js')}}"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -142,6 +308,177 @@
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('dist/js/demo.js')}}"></script>
+
+<script type="application/javascript">
+    $(document).ready(function () {
+        @if(Session::get('user') == null)
+        $("#forgot-password-modal-save-loading-indicator").hide();
+        $("#sign-in-modal-save-loading-indicator").hide();
+        $("#register-modal-save-loading-indicator").hide();
+
+        $("#sign-in-modal-button-forgot-password").click(function () {
+            $("#sign-in-modal").modal('hide');
+            $("#forgot-password-modal").modal('show');
+        });
+
+        $("#forgot-password-modal-form").on("submit", function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/web/forgot",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                data: JSON.stringify({
+                    "email": $("#forgot-password-modal-form-field-email").val(),
+                }),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                beforeSend: function () {
+                    $("#forgot-password-modal-save-loading-indicator").show();
+                    $("#forgot-password-modal-save-button-label").hide();
+                },
+                success: function (result) {
+                    $("#forgot-password-modal").modal('hide');
+                    toastr.success(result.message);
+                },
+                error: function (result) {
+                    toastr.error(result.responseJSON.message);
+                },
+                complete: function () {
+                    $("#forgot-password-modal-save-loading-indicator").hide();
+                    $("#forgot-password-modal-save-button-label").show();
+                }
+            });
+        });
+        $("#sign-in-modal-form").on("submit", function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/web/login",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                data: JSON.stringify({
+                    "email": $("#sign-in-modal-form-field-email").val(),
+                    "password": $("#sign-in-modal-form-field-password").val()
+                }),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                beforeSend: function () {
+                    $("#sign-in-modal-save-loading-indicator").show();
+                    $("#sign-in-modal-save-button-label").hide();
+                },
+                success: function (result) {
+                    toastr.success(result.message);
+                    $("#sign-in-modal-save-loading-indicator").hide();
+                    $("#sign-in-modal-save-button-label").hide();
+                    window.setTimeout(function () {
+                        location.reload();
+                    }, 500);
+                },
+                error: function (result) {
+                    toastr.error(result.responseJSON.message);
+                },
+                complete: function () {
+                    $("#sign-in-modal-save-loading-indicator").hide();
+                    $("#sign-in-modal-save-button-label").show();
+                }
+            });
+        });
+        $("#register-modal-form").on("submit", function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/web/register",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                data: JSON.stringify({
+                    "email": $("#register-modal-form-field-email").val(),
+                    "password": $("#register-modal-form-field-password").val(),
+                    "name": $("#register-modal-form-field-password").val(),
+                    "password_confirm": $("#register-modal-form-password-confirm").val(),
+                }),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                beforeSend: function () {
+                    $("#register-modal-save-loading-indicator").show();
+                    $("#register-modal-save-button-label").hide();
+                },
+                success: function (result) {
+                    toastr.success(result.message);
+                },
+                error: function (result) {
+                    toastr.error(result.responseJSON.message);
+                },
+                complete: function () {
+                    $("#register-modal-save-loading-indicator").hide();
+                    $("#register-modal-save-button-label").show();
+                    $("#register-modal").modal('hide');
+                }
+            });
+        });
+        @else
+        $("#change-password-modal-save-loading-indicator").hide();
+        $(".logout-button").on('click', function () {
+            swal({
+                title: "Do you want to sign out ?",
+                buttons: ["No", "Yes"],
+                dangerMode: true,
+            }).then((logout) => {
+                if (logout) {
+                    location.href = "/web/logout";
+                }
+            });
+        });
+        $("#change-password-modal-form").on("submit", function (e) {
+            e.preventDefault();
+
+            const password = $("#change-password-modal-form-field-password");
+            const passwordConfirm = $("#change-password-modal-form-field-password-confirm");
+
+            $.ajax({
+                type: "POST",
+                url: "/web/change/password",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                data: JSON.stringify({
+                    "email": "{{ Session::get('email') }}",
+                    "password": password.val(),
+                    "password_confirm": passwordConfirm.val(),
+                }),
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                beforeSend: function () {
+                    $("#change-password-modal-save-loading-indicator").show();
+                    $("#change-password-modal-save-button-label").hide();
+                },
+                success: function (result) {
+                    password.val(null);
+                    passwordConfirm.val(null);
+
+                    toastr.success(result.message);
+
+                    $("#change-password-modal").modal('hide');
+                },
+                error: function (result) {
+                    toastr.error(result.responseJSON.message);
+                },
+                complete: function () {
+                    $("#change-password-modal-save-loading-indicator").hide();
+                    $("#change-password-modal-save-button-label").show();
+                }
+            });
+        });
+        @endif
+    });
+</script>
 
 @yield('js')
 
