@@ -59,6 +59,17 @@
                         <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
                     </td>
                 </tr>
+                <tr>
+                    <td>1.</td>
+                    <td>http://www.google.com</td>
+                    <td>http://shorturl.test/s/fffs</td>
+                    <td>5</td>
+                    <td><label class="label label-info">Never</label></td>
+                    <td><label class="label label-success">Yes</label></td>
+                    <td>
+                        <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
+                    </td>
+                </tr>
             </table>
         </div>
         <!-- /.box-body -->

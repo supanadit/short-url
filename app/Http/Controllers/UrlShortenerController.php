@@ -104,9 +104,11 @@ class UrlShortenerController extends Controller
 
             $urlExpired = false;
             if ($urlAddress['date_expired'] != null) {
-                $today = Carbon::now();
+                $today = Carbon::now()->setTime(0, 0, 0);
                 $urlExpiredDate = Carbon::parse($urlAddress['date_expired']);
-                $urlExpired = $urlExpiredDate->lessThan($today);
+                if (!$today->equalTo($urlExpiredDate)) {
+                    $urlExpired = $urlExpiredDate->lessThanOrEqualTo($today);
+                }
             }
 
             if (!$urlExpired) {
