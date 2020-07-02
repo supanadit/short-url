@@ -21,6 +21,11 @@ Route::post('/s/{pathGenerated}/open/protection', "UrlShortenerController@openPr
 Route::middleware('auth.web')->group(function () {
     Route::get('/list', "UrlShortenerController@viewList");
 
+    // URL Shortener Controller
+    Route::get('/web/url/address/list', "UrlShortenerController@urlAddressList");
+    Route::delete('/web/url/address/delete/{id}', "UrlShortenerController@urlAddressDelete");
+
+    // Security Controller
     Route::post('/web/change/password', "SecurityController@formChangePassword");
 });
 

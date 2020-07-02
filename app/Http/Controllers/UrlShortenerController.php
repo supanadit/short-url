@@ -19,7 +19,9 @@ class UrlShortenerController extends Controller
 
     public function viewList()
     {
-        return view('list');
+        return view('list', [
+            "url" => URL::to('/'),
+        ]);
     }
 
     public function createShortURL(Request $request)
@@ -166,6 +168,32 @@ class UrlShortenerController extends Controller
         } else {
             return response()->json([
                 "message" => "Path not exist",
+            ], 400);
+        }
+    }
+
+    public function urlAddressList(Request $request)
+    {
+        $user = $request->session()->get('user');
+        return UrlAddress::where('user_id', $user)->paginate();
+    }
+
+    public function urlAddressDelete(Request $request, $id)
+    {
+        $urlAddress = UrlAddress::find($id);
+        if ($urlAddress) {
+            if ($urlAddress->delete()) {
+                return response()->json([
+                    "message" => "Success delete"
+                ], 200);
+            } else {
+                return response()->json([
+                    "message" => "Failed delete"
+                ], 500);
+            }
+        } else {
+            return response()->json([
+                "message" => "URL Address with id $id is not exist"
             ], 400);
         }
     }
