@@ -20,6 +20,7 @@
             <table class="table table-bordered">
                 <thead>
                 <tr>
+                    <th style="width:10px;text-align: center;">No</th>
                     <th>Destination</th>
                     <th>Short URL</th>
                     <th style="text-align:center;">Click</th>
@@ -55,6 +56,7 @@
         let page = 1;
         let canPageNext = false;
         let canPagePrevious = false;
+        let perPage = 15;
 
         $(document).ready(function () {
             clipboard.on('success', function (e) {
@@ -77,7 +79,7 @@
                     async: true,
                     beforeSend: function () {
                         $("#table-url-address-body").html("<tr>\n" +
-                            "                            <td colspan=\"6\" style=\"text-align:center;color:#777;\">\n" +
+                            "                            <td colspan=\"7\" style=\"text-align:center;color:#777;\">\n" +
                             "                                <i class=\"fa fa-spinner fa-spin\"></i>\n" +
                             "                            </td>\n" +
                             "                        </tr>");
@@ -85,10 +87,10 @@
                     success: function (result) {
                         rebuildPagination(result);
                         if (result.data.length !== 0) {
-                            $("#table-url-address-body").html(result.data.map(m => urlAddressRowComponent(m)));
+                            $("#table-url-address-body").html(result.data.map((m, i) => urlAddressRowComponent(m, i)));
                         } else {
                             $("#table-url-address-body").html("<tr>\n" +
-                                "                            <td colspan=\"6\" style=\"text-align:center;color:#777;\">\n" +
+                                "                            <td colspan=\"7\" style=\"text-align:center;color:#777;\">\n" +
                                 "                                <span>You don't have any shorten url address</span>\n" +
                                 "                            </td>\n" +
                                 "                        </tr>");
@@ -119,7 +121,7 @@
                 });
             }
 
-            const urlAddressRowComponent = function (urlAddressData) {
+            const urlAddressRowComponent = function (urlAddressData, i) {
                 let expiredStatus = "<label class=\"label label-info\">Never</label>";
                 if (urlAddressData.date_expired != null && urlAddressData.date_expired !== "") {
                     expiredStatus = "<label class=\"label " + (urlAddressData.is_expired ? "label-danger" : "label-success") + "\">2020-02-20</label>";
@@ -128,6 +130,7 @@
                 const destination = urlAddressData.full_url_destination;
                 const generatedURL = "{{$url}}/s/" + urlAddressData.path_generated;
                 const row = "<tr>\n" +
+                    "                    <td style=\"text-align:center;\">" + ((page !== 1 ? (page - 1) * perPage : 0) + (i + 1)) + "</td>\n" +
                     "                    <td><a href=\"" + destination + "\" target=\"_blank\">" + destination + "</a></td>\n" +
                     "                    <td><a href=\"" + generatedURL + "\" target=\"_blank\">" + generatedURL + "</a></td>\n" +
                     "                    <td align=\"center\">" + urlAddressData.click + "</td>\n" +
