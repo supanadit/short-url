@@ -1,6 +1,6 @@
 # Short URL
 
-This is url shortener application such as [bit.ly](http://bit.ly)
+This is url shortener application is similar to [bit.ly](http://bit.ly)
 
 ## Demo
 - Host : https://short.supanadit.com
