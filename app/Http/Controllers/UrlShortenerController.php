@@ -58,7 +58,7 @@ class UrlShortenerController extends Controller
             $saveGeneratedURL['path_generated'] = $generatedPath;
             $userSession = $request->session()->has('user');
             if ($userSession) {
-                $saveGeneratedURL['user_id'] = $userSession;
+                $saveGeneratedURL['user_id'] = $request->session()->get('user');
             }
 
             if ($request->input('expired_date') != null && $request->input('expired_date') != "") {
