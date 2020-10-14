@@ -131,7 +131,7 @@
     <footer class="main-footer">
         <div class="container">
             <div class="pull-right hidden-xs">
-                <b>Version</b> 1.0.1
+                <b>Version</b> 1.0.2
             </div>
             Copyright &copy; @php echo date('Y'); @endphp <b>Short</b>&nbsp;URL. All rights reserved.
         </div>
