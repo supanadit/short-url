@@ -16,7 +16,7 @@
             <div class="box-tools"></div>
         </div>
         <!-- /.box-header -->
-        <div class="box-body">
+        <div class="box-body" style="overflow-x: auto;">
             <table class="table table-bordered">
                 <thead>
                 <tr>
