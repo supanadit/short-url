@@ -1,24 +1,24 @@
 @extends('layout.default')
 
 @section('title')
-    My URL Shortener
+My URL Shortener
 @endsection
 
 @section('subtitle')
-    List all of your own URL Shortener
+List all of your own URL Shortener
 @endsection
 
 @section('content')
-    <div class="box box-info">
-        <div class="box-header">
-            <h3 class="box-title"></h3>
+<div class="box box-info">
+    <div class="box-header">
+        <h3 class="box-title"></h3>
 
-            <div class="box-tools"></div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body" style="overflow-x: auto;">
-            <table class="table table-bordered">
-                <thead>
+        <div class="box-tools"></div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body" style="overflow-x: auto;">
+        <table class="table table-bordered">
+            <thead>
                 <tr>
                     <th style="width:10px;text-align: center;">No</th>
                     <th>Destination</th>
@@ -28,30 +28,30 @@
                     <th>Protection</th>
                     <th>Action</th>
                 </tr>
-                </thead>
-                <tbody id="table-url-address-body">
+            </thead>
+            <tbody id="table-url-address-body">
                 <tr>
                     <td colspan="6" style="text-align:center;color:#777;">
                         <i class="fa fa-spinner fa-spin"></i>
                     </td>
                 </tr>
-                </tbody>
-            </table>
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-            Page <span id="current-page">1</span>,
-            Showing <span id="range-start-data">0</span> to <span id="range-end-data">0</span>
-            of <span id="total-entries">0</span> entries
-            <ul class="pagination pagination-sm no-margin pull-right" id="pagination-button"></ul>
-        </div>
+            </tbody>
+        </table>
     </div>
-    <!-- /.box -->
+    <!-- /.box-body -->
+    <div class="box-footer">
+        Page <span id="current-page">1</span>,
+        Showing <span id="range-start-data">0</span> to <span id="range-end-data">0</span>
+        of <span id="total-entries">0</span> entries
+        <ul class="pagination pagination-sm no-margin pull-right" id="pagination-button"></ul>
+    </div>
+</div>
+<!-- /.box -->
 @endsection
 
 @section('js')
-    <script type="application/javascript">
-        const clipboard = new ClipboardJS('.btn');
+<script type="application/javascript">
+    const clipboard = new ClipboardJS('.btn');
 
         let page = 1;
         let canPageNext = false;
@@ -186,5 +186,5 @@
             // Initialize
             loadURLAddress();
         });
-    </script>
+</script>
 @endsection

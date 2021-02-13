@@ -100,7 +100,7 @@ class UrlShortenerController extends Controller
             $url = $urlAddress->url_destination;
             if ($httpPath == substr($url, 0, strlen($httpPath))) {
                 $hasHttpOrHttps = true;
-            } else if ($httpsPath == substr($url, 0, strlen($httpsPath))) {
+            } elseif ($httpsPath == substr($url, 0, strlen($httpsPath))) {
                 $hasHttpOrHttps = true;
             }
 
@@ -145,7 +145,7 @@ class UrlShortenerController extends Controller
             $url = $urlAddress->url_destination;
             if ($httpPath == substr($url, 0, strlen($httpPath))) {
                 $hasHttpOrHttps = true;
-            } else if ($httpsPath == substr($url, 0, strlen($httpsPath))) {
+            } elseif ($httpsPath == substr($url, 0, strlen($httpsPath))) {
                 $hasHttpOrHttps = true;
             }
 

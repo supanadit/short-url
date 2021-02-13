@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
-    <meta name="csrf_token" content="{{ csrf_token() }}"/>
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Short URL</title>
-    <link rel="shortcut icon" href="{{asset('favicon.png')}}"/>
+    <link rel="shortcut icon" href="{{asset('favicon.png')}}" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -30,48 +31,49 @@
 
     <!-- Google Font -->
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
+
 <body class="hold-transition login-page">
-<div class="login-box">
-    <div class="login-logo">
-        <a href="/"><b>Short</b>&nbsp;URL</a>
-    </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-        <p class="login-box-msg">Protected URL</p>
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="/"><b>Short</b>&nbsp;URL</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">Protected URL</p>
 
-        <form action="/" method="post" id="protection-form">
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Password" id="password">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <div class="row">
-                <div class="col-xs-8"></div>
-                <!-- /.col -->
-                <div class="col-xs-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">
-                        Open Link
-                    </button>
+            <form action="/" method="post" id="protection-form">
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" placeholder="Password" id="password">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
-                <!-- /.col -->
-            </div>
-        </form>
+                <div class="row">
+                    <div class="col-xs-8"></div>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">
+                            Open Link
+                        </button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
+        <!-- /.login-box-body -->
     </div>
-    <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
+    <!-- /.login-box -->
 
-<!-- jQuery 3 -->
-<script src="{{asset('vendor/jquery/dist/jquery.min.js')}}"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="{{asset('vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-<!-- Toastr -->
-<script src="{{asset('vendor/toastr/toastr.min.js')}}"></script>
-<!-- iCheck -->
-<script src="{{asset('plugin/iCheck/icheck.min.js')}}"></script>
-<script>
-    $(document).ready(function () {
+    <!-- jQuery 3 -->
+    <script src="{{asset('vendor/jquery/dist/jquery.min.js')}}"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="{{asset('vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <!-- Toastr -->
+    <script src="{{asset('vendor/toastr/toastr.min.js')}}"></script>
+    <!-- iCheck -->
+    <script src="{{asset('plugin/iCheck/icheck.min.js')}}"></script>
+    <script>
+        $(document).ready(function () {
         $("#protection-form").on("submit", function (e) {
             e.preventDefault();
             $.ajax({
@@ -96,6 +98,7 @@
             });
         });
     });
-</script>
+    </script>
 </body>
+
 </html>

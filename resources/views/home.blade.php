@@ -1,82 +1,75 @@
 @extends('layout.default')
 
 @section('title')
-    Welcome
+Welcome
 @endsection
 
 @section('subtitle')
-    The Simple URL Shortener
+The Simple URL Shortener
 @endsection
 
 @section('content')
-    <div class="box box-default">
-        <div class="box-body">
-            <form action="/" id="shorten-url-form">
-                <input type="text" class="form-control" placeholder="Enter your URL" id="shorten-url-form-field-url"/>
-                <br/>
-                <div class="form-group">
-                    <label>Expired Date</label>
+<div class="box box-default">
+    <div class="box-body">
+        <form action="/" id="shorten-url-form">
+            <input type="text" class="form-control" placeholder="Enter your URL" id="shorten-url-form-field-url" />
+            <br />
+            <div class="form-group">
+                <label>Expired Date</label>
 
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <input type="checkbox" id="shorten-url-form-field-expiration-date-checkbox"/>
-                        </div>
-                        <input type="text"
-                               class="form-control pull-right"
-                               id="shorten-url-form-field-expiration-date"
-                               placeholder="Set expired date" readonly>
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <input type="checkbox" id="shorten-url-form-field-expiration-date-checkbox" />
                     </div>
-                    <!-- /.input group -->
+                    <input type="text" class="form-control pull-right" id="shorten-url-form-field-expiration-date"
+                        placeholder="Set expired date" readonly>
                 </div>
-                <!-- /input-group -->
-                <div class="form-group">
-                    <label>Password Protection</label>
+                <!-- /.input group -->
+            </div>
+            <!-- /input-group -->
+            <div class="form-group">
+                <label>Password Protection</label>
 
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <input type="checkbox" id="shorten-url-form-field-password-checkbox"/>
-                        </div>
-                        <input type="password"
-                               class="form-control pull-right"
-                               placeholder="Insert password"
-                               id="shorten-url-form-field-password">
+                <div class="input-group date">
+                    <div class="input-group-addon">
+                        <input type="checkbox" id="shorten-url-form-field-password-checkbox" />
                     </div>
-                    <!-- /.input group -->
+                    <input type="password" class="form-control pull-right" placeholder="Insert password"
+                        id="shorten-url-form-field-password">
                 </div>
-                <br/>
-                <div class="row">
-                    <div class="col-md-2 col-sm-4">
-                        <button type="submit" class="btn btn-info btn-flat btn-block">
-                            <span>Shorten URL</span>
-                        </button>
-                    </div>
-                    <div class="col-md-10 col-sm-8">
-                        <br class="visible-xs"/>
-                        <div class="input-group" id="shorten-url-form-field-url-generated-group" style="display: none;">
-                            <input type="text"
-                                   class="form-control"
-                                   placeholder="Generated URL"
-                                   id="shorten-url-form-field-url-generated"
-                                   readonly>
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-danger btn-flat"
-                                        data-clipboard-target="#shorten-url-form-field-url-generated">
-                                    <i class="fa fa-clipboard"></i>
-                                </button>
-                            </span>
-                        </div>
+                <!-- /.input group -->
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2 col-sm-4">
+                    <button type="submit" class="btn btn-info btn-flat btn-block">
+                        <span>Shorten URL</span>
+                    </button>
+                </div>
+                <div class="col-md-10 col-sm-8">
+                    <br class="visible-xs" />
+                    <div class="input-group" id="shorten-url-form-field-url-generated-group" style="display: none;">
+                        <input type="text" class="form-control" placeholder="Generated URL"
+                            id="shorten-url-form-field-url-generated" readonly>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-danger btn-flat"
+                                data-clipboard-target="#shorten-url-form-field-url-generated">
+                                <i class="fa fa-clipboard"></i>
+                            </button>
+                        </span>
                     </div>
                 </div>
-            </form>
-        </div>
-        <!-- /.box-body -->
+            </div>
+        </form>
     </div>
-    <!-- /.box -->
+    <!-- /.box-body -->
+</div>
+<!-- /.box -->
 @endsection
 
 @section('js')
-    <script type="application/javascript">
-        const clipboard = new ClipboardJS('.btn');
+<script type="application/javascript">
+    const clipboard = new ClipboardJS('.btn');
 
         $('#shorten-url-form-field-expiration-date').datepicker({
             autoclose: true,
@@ -129,5 +122,5 @@
                 });
             });
         });
-    </script>
+</script>
 @endsection
