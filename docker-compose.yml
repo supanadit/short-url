@@ -1,0 +1,25 @@
+version: "2"
+services:
+  mysql:
+    image: "bitnami/mysql:8.0"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./mysql:/bitnami/mysql/data"
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=short
+
+  todo-app:
+    image: "supanadit/short-url:1.0.2"
+    ports:
+      - "80:80"
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=short
+      - DB_USERNAME=root
+      - DB_PASSWORD=secret
+    depends_on:
+      - mysql

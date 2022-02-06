@@ -1,0 +1,15 @@
+.github/
+.idea/
+.vscode/
+tests
+docker-compose.yml
+.dockerignore
+.editorconfig
+.gitattributes
+.gitignore
+.styleci.yml
+Dockerfile
+phpunit.xml
+README.md
+
+mysql

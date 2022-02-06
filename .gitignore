@@ -11,4 +11,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 
-.idea
+.idea/
+.vscode/
+
+mysql/

@@ -51,6 +51,41 @@ This is url shortener application is similar to [bit.ly](http://bit.ly)
 </VirtualHost>
 ```
 
+## Docker Way
+
+This app can run inside docker with official support
+
+### Via Docker Compose
+
+```bash
+docker-compose up -d
+```
+
+### Run Migration
+
+```bash
+docker-compose exec todo-app php artisan migrate
+```
+
+### Run Seeder
+
+```bash
+docker-compose exec todo-app php artisan db:seed
+```
+
+### Build Docker By Yourself
+
+```bash
+docker build . -t supanadit/short-url:1.0.2
+```
+
+### Troubleshooting MySQL Won't Run In Docker
+
+Run this script `sudo chown -R 1001:1001 mysql`
+
+Because we used Bitnami distribution version of MySQL, so we need to change the permission of mysql folder, since it
+also described in docker page of bitnami
+
 ## Note
 
 If you want to use forgot password feature, you must provide your email and password at `.env`
