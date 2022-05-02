@@ -10,8 +10,10 @@ services:
       - MYSQL_ROOT_PASSWORD=secret
       - MYSQL_DATABASE=short
 
-  todo-app:
-    image: "supanadit/short-url:1.0.2"
+  short-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "80:80"
     environment:

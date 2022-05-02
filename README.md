@@ -64,19 +64,69 @@ docker-compose up -d
 ### Run Migration
 
 ```bash
-docker-compose exec todo-app php artisan migrate
+docker-compose exec short-app php artisan migrate
 ```
 
 ### Run Seeder
 
 ```bash
-docker-compose exec todo-app php artisan db:seed
+docker-compose exec short-app php artisan db:seed
 ```
 
 ### Build Docker By Yourself
 
 ```bash
 docker build . -t supanadit/short-url:1.0.2
+```
+
+## Development Using Docker
+
+### Run Application
+
+```bash
+docker-compose -f docker-compose.dev.yml up -d
+```
+
+### Installing / Updating Dependencies
+
+```bash
+docker-compose -f docker-compose.dev.yml exec -w /srv short composer install # Composer Install
+```
+
+### Generate Key
+
+```bash
+docker-compose -f docker-compose.dev.yml exec -w /srv short php artisan key:generate # Generate Key
+```
+
+### Database Migration
+
+```bash
+docker-compose -f docker-compose.dev.yml exec -w /srv short php artisan migrate
+```
+
+### Database Seed
+
+```bash
+docker-compose -f docker-compose.dev.yml exec -w /srv short php artisan db:seed
+```
+
+### Shutdown Application
+
+```bash
+docker-compose -f docker-compose.dev.yml down
+```
+
+### Updating `.env`
+
+```bash
+docker-compose -f docker-compose.dev.yml exec -w /srv short php artisan config:cache
+```
+
+### Rebuilding Dockerfile
+
+```bash
+docker-compose -f docker-compose.dev.yml build
 ```
 
 ### Troubleshooting MySQL Won't Run In Docker

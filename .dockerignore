@@ -1,14 +1,23 @@
 .github/
 .idea/
 .vscode/
+
 tests
+
+docker-compose.dev.yml
 docker-compose.yml
+
 .dockerignore
 .editorconfig
 .gitattributes
 .gitignore
 .styleci.yml
+
+vendor
+
 Dockerfile
+PHP.Dockerfile
+
 phpunit.xml
 README.md
 

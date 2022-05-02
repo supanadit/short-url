@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  todo:
+    build:
+      context: .
+      dockerfile: PHP.Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./:/short"
+
+  mysqldb:
+    image: "bitnami/mysql:8.0"
+    ports:
+      - "3306:3306"
+    volumes:
+      - "./mysql:/bitnami/mysql/data"
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=short
