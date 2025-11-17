@@ -2,12 +2,6 @@
 
 This is url shortener application is similar to [bit.ly](http://bit.ly)
 
-## Demo
-
-- Host : https://short.supanadit.com
-- Email : admin@email.com
-- Password : 123
-
 ### Generate Short URL
 
 ![Demo 1](demo/demo-1.gif)
